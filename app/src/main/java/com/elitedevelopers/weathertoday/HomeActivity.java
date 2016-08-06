@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -15,6 +17,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HomeActivity extends AppCompatActivity {
 
     WeatherApi weatherApi;
+    Weather weather;
+    City city;
+    WeatherCollectionResponse weatherCollectionResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,16 +28,25 @@ public class HomeActivity extends AppCompatActivity {
 
         initializeNetworkingLibrary();
         getData();
+
+//        List<Weather> weathers = weatherCollectionResponse.getWeather();
+//        String description  = weathers.get(0).getDescription();
+//        Toast.makeText(HomeActivity.this, description, Toast.LENGTH_SHORT).show();
     }
 
     private void getData() {
-        Call<WeatherCollectionResponse> weatherCollectionResponseCall = weatherApi.getWeather();
+        final Call<WeatherCollectionResponse> weatherCollectionResponseCall = weatherApi.getWeather();
         weatherCollectionResponseCall.enqueue(new Callback<WeatherCollectionResponse>() {
             @Override
             public void onResponse(Call<WeatherCollectionResponse> call, Response<WeatherCollectionResponse> response) {
-                WeatherCollectionResponse poetCollectionResponse = response.body();
+                weatherCollectionResponse = response.body();
 //                List<PoetCollectionResponse.Poet> poets = poetCollectionResponse.getPoets();
 //                Log.e("data", " onResponse " + poets.get(0).getName());
+
+                city = weatherCollectionResponse.getCity();
+                String country = city.getCountry();
+                Toast.makeText(HomeActivity.this, country, Toast.LENGTH_SHORT).show();
+
                 Toast.makeText(HomeActivity.this, "Successful", Toast.LENGTH_SHORT).show();
             }
 
