@@ -3,6 +3,9 @@ package com.elitedevelopers.weathertoday;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Mobile App Develop on 6-8-16.
  */
