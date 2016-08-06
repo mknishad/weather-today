@@ -10,7 +10,7 @@ import android.os.Handler;
  */
 public class SplashScreen extends Activity {
 
-    private final int SPLASH_DISPLAY_LENGTH = 3000; // set the delay for category screen
+    private final int SPLASH_DISPLAY_LENGTH = 2000; // set the delay for category screen
 
     @Override
     public void onCreate(Bundle icicle) {
