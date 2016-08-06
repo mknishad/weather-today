@@ -11,4 +11,7 @@
     <string name="wind">Wind :</string>
     <string name="km_h">Km/h</string>
     <string name="wind_value">wind</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

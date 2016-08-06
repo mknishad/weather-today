@@ -13,7 +13,7 @@
 
         <!-- Splash screen -->
         <activity
-            android:name="com.elitedevelopers.weathertoday.SplashScreen"
+            android:name=".splashscreen.SplashScreen"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
@@ -25,7 +25,7 @@
         </activity>
 
         <!--Home Activity-->
-        <activity android:name=".HomeActivity">
+        <activity android:name=".activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>

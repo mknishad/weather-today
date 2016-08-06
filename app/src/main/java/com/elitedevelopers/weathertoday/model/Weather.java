@@ -1,4 +1,4 @@
-package com.elitedevelopers.weathertoday;
+package com.elitedevelopers.weathertoday.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

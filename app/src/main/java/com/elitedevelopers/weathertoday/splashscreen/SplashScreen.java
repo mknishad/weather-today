@@ -1,9 +1,12 @@
-package com.elitedevelopers.weathertoday;
+package com.elitedevelopers.weathertoday.splashscreen;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.elitedevelopers.weathertoday.R;
+import com.elitedevelopers.weathertoday.activity.HomeActivity;
 
 /**
  * Created by Nishad on 04-Aug-16.

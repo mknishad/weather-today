@@ -1,5 +1,10 @@
-package com.elitedevelopers.weathertoday;
+package com.elitedevelopers.weathertoday.response;
 
+import com.elitedevelopers.weathertoday.model.City;
+import com.elitedevelopers.weathertoday.model.Clouds;
+import com.elitedevelopers.weathertoday.model.Main;
+import com.elitedevelopers.weathertoday.model.Weather;
+import com.elitedevelopers.weathertoday.model.Wind;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

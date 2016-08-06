@@ -1,12 +1,16 @@
-package com.elitedevelopers.weathertoday;
+package com.elitedevelopers.weathertoday.activity;
 
-import android.provider.SyncStateContract;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import java.util.List;
+import com.elitedevelopers.weathertoday.constant.Constants;
+import com.elitedevelopers.weathertoday.R;
+import com.elitedevelopers.weathertoday.interfaceapi.WeatherApi;
+import com.elitedevelopers.weathertoday.response.WeatherCollectionResponse;
+import com.elitedevelopers.weathertoday.model.City;
+import com.elitedevelopers.weathertoday.model.Weather;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -14,7 +18,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends FragmentActivity {
 
     WeatherApi weatherApi;
     Weather weather;
