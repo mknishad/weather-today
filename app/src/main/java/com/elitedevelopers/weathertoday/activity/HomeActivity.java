@@ -1,7 +1,9 @@
 package com.elitedevelopers.weathertoday.activity;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.app.ActionBar;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -18,8 +20,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class HomeActivity extends FragmentActivity {
+public class HomeActivity extends FragmentActivity implements ActionBar.TabListener {
 
+    ActionBar actionBar;
     WeatherApi weatherApi;
     Weather weather;
     City city;
@@ -29,6 +32,36 @@ public class HomeActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        // get a reference of the action bar
+        actionBar = getActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        ActionBar.Tab tab1 = actionBar.newTab();
+        tab1.setText("Day 1");
+        tab1.setTabListener(this);
+
+        ActionBar.Tab tab2 = actionBar.newTab();
+        tab1.setText("Day 2");
+        tab1.setTabListener(this);
+
+        ActionBar.Tab tab3 = actionBar.newTab();
+        tab1.setText("Day 3");
+        tab1.setTabListener(this);
+
+        ActionBar.Tab tab4 = actionBar.newTab();
+        tab1.setText("Day 4");
+        tab1.setTabListener(this);
+
+        ActionBar.Tab tab5 = actionBar.newTab();
+        tab1.setText("Day 5");
+        tab1.setTabListener(this);
+
+        actionBar.addTab(tab1);
+        actionBar.addTab(tab2);
+        actionBar.addTab(tab3);
+        actionBar.addTab(tab4);
+        actionBar.addTab(tab5);
 
         initializeNetworkingLibrary();
         getData();
@@ -71,4 +104,18 @@ public class HomeActivity extends FragmentActivity {
         weatherApi = retrofit.create(WeatherApi.class);
     }
 
+    @Override
+    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+    }
+
+    @Override
+    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+    }
+
+    @Override
+    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+    }
 }
