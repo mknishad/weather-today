@@ -1,6 +1,7 @@
 package com.elitedevelopers.weathertoday.activity;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -8,8 +9,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.elitedevelopers.weathertoday.About;
 import com.elitedevelopers.weathertoday.R;
 import com.elitedevelopers.weathertoday.constant.Constants;
 import com.elitedevelopers.weathertoday.fragment.FifthFragment;
@@ -125,12 +130,26 @@ public class HomeActivity extends FragmentActivity {
         Log.e("url ",  "getData " + weatherCollectionResponseCall.request().url());
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.main,menu);
+        return true;
+    }
+
     private void initializeNetworkingLibrary() {
         Retrofit retrofit = new  Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         weatherApi = retrofit.create(WeatherApi.class);
+
+    }
+
+    public void Aboutus(MenuItem item) {
+        Intent about=new Intent(this, About.class);
+        startActivity(about);
+
     }
 
     /*
@@ -183,4 +202,5 @@ class MyAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return 5;
     }
+
 }
