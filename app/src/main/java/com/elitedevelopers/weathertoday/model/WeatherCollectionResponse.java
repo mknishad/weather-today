@@ -24,7 +24,7 @@ public class WeatherCollectionResponse {
     private Integer cnt;
     @SerializedName("list")
     @Expose
-    private java.util.List<com.elitedevelopers.weathertoday.model.List> list = new ArrayList<com.elitedevelopers.weathertoday.model.List>();
+    private java.util.List<com.elitedevelopers.weathertoday.model.List> list = new ArrayList<>();
 
     /**
      *

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by Nishad on 07-Aug-16.
  */
+
 public class List {
 
     @SerializedName("dt")

@@ -79,21 +79,15 @@ public class HomeActivity extends FragmentActivity {
 
         initializeNetworkingLibrary();
         getData();
-        showInfo();
 
 //        List<Weather> weathers = weatherCollectionResponse.getWeather();
 //        String description  = weathers.get(0).getDescription();
 //        Toast.makeText(HomeActivity.this, description, Toast.LENGTH_SHORT).show();
     }
 
-    private void showInfo() {
-//        Log.e("Clouds", "onResponse: " + clouds.toString());
-//        Log.e("Response", "showInfo: " + weatherCollectionResponse.toString() );
-    }
-
-
     private void getData() {
-        final Call<WeatherCollectionResponse> weatherCollectionResponseCall = weatherApi.getWeather();
+        Call<WeatherCollectionResponse> weatherCollectionResponseCall = weatherApi.getWeather();
+        Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
         weatherCollectionResponseCall.enqueue(new Callback<WeatherCollectionResponse>() {
             @Override
             public void onResponse(Call<WeatherCollectionResponse> call, Response<WeatherCollectionResponse> response) {
@@ -106,9 +100,10 @@ public class HomeActivity extends FragmentActivity {
 //                List<Weather>  weathers = weatherCollectionResponse.getWeather();
 //                String description = weathers.get(0).getDescription();
 //                String icon = weathers.get(0).getIcon();
-                //clouds = weatherCollectionResponse.getClouds();
-                String cityName = weatherCollectionResponse.getCity().getName();
-                Toast.makeText(HomeActivity.this, cityName, Toast.LENGTH_SHORT).show();
+                clouds = weatherCollectionResponse.getList().get(0).getClouds();
+                Integer all = clouds.getAll();
+//                String cityName = weatherCollectionResponse.getCity().getName();
+                Toast.makeText(HomeActivity.this, ""+all, Toast.LENGTH_SHORT).show();
 
 //                Log.e("Clouds", "onResponse: " + clouds.toString());
 //                Integer all = clouds.getAll();
@@ -123,6 +118,7 @@ public class HomeActivity extends FragmentActivity {
             @Override
             public void onFailure(Call<WeatherCollectionResponse> call, Throwable t) {
                 Toast.makeText(HomeActivity.this, " getData failed", Toast.LENGTH_SHORT).show();
+                Log.e("getdata", "onFailure: ");
             }
         });
 

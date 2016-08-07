@@ -3,15 +3,24 @@
     <string name="temperature">Temperature:</string>
     <string name="celcious">celcious</string>
     <string name="c">°C</string>
-    <string name="humadity">Humadity :</string>
     <string name="deg">deg</string>
     <string name="percent">%</string>
-    <string name="rain">Rain :</string>
+    <string name="rain">Rain:</string>
     <string name="rainy">rainy</string>
-    <string name="wind">Wind :</string>
+    <string name="wind">Wind:</string>
     <string name="km_h">Km/h</string>
-    <string name="wind_value">wind</string>
+    <string name="wind_value">Wind Value</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="city_name">City Name</string>
+    <string name="degree">°</string>
+    <string name="date">Date</string>
+    <string name="humidity">Humidity:</string>
+    <string name="pressure">Pressure:</string>
+    <string name="pressure_value">Prssure Value</string>
+    <string name="humidity_value">Humidity Value</string>
+    <string name="precipitation">Precipitation:</string>
+    <string name="precipitation_value">Precipation</string>
+    <string name="today">Today</string>
 </resources>
