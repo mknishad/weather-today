@@ -1,11 +1,8 @@
 package com.elitedevelopers.weathertoday.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,13 +10,12 @@ import android.widget.Toast;
 
 import com.elitedevelopers.weathertoday.R;
 import com.elitedevelopers.weathertoday.constant.Constants;
-import com.elitedevelopers.weathertoday.fragment.FifthFragment;
-import com.elitedevelopers.weathertoday.fragment.FirstFragment;
-import com.elitedevelopers.weathertoday.fragment.FourthFragment;
-import com.elitedevelopers.weathertoday.fragment.SecondFragment;
-import com.elitedevelopers.weathertoday.fragment.ThirdFragment;
 import com.elitedevelopers.weathertoday.interfaceapi.WeatherApi;
 import com.elitedevelopers.weathertoday.model.WeatherCollectionResponse;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,37 +23,45 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class HomeActivity extends FragmentActivity {
+public class HomeActivity extends AppCompatActivity {
 
-    WeatherApi weatherApi;
-    WeatherCollectionResponse weatherCollectionResponse;
-    ViewPager viewPager;
-    TextView tvDay;
-    TextView tvDate;
-    TextView tvCityName;
-    TextView tvTemperature;
-    TextView tvCondition;
-    TextView tvHumidity;
-    TextView tvPressure;
-    TextView tvPrecipitation;
-    TextView tvWind;
-    ImageView ivCondition;
+    private WeatherApi weatherApi;
+    private WeatherCollectionResponse weatherCollectionResponse;
+
+    private ViewPager viewPager;
+    private TextView tvDay;
+    private TextView tvDate;
+    private TextView tvCityName;
+    private TextView tvTemperature;
+    private TextView tvCondition;
+    private TextView tvHumidity;
+    private TextView tvPressure;
+    private TextView tvPrecipitation;
+    private TextView tvWind;
+    private ImageView ivCondition;
+
+    private String dayOfTheWeek;
+    private String formattedDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        initializeViews();
         initializeNetworkingLibrary();
         getData();
-        initializeViews();
+        fetchDataFromResponse();
+        setData();
+    }
 
-        viewPager.setAdapter(new MyAdapter(getSupportFragmentManager()));
-
+    private void setData() {
+        tvDay.setText(dayOfTheWeek);
+        tvDate.setText(formattedDate);
+        tvCityName.setText("Dhaka");
     }
 
     private void initializeViews() {
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
         tvDay = (TextView) findViewById(R.id.tvDay);
         tvDate = (TextView) findViewById(R.id.tvDate);
         tvCityName = (TextView) findViewById(R.id.tvCityName);
@@ -91,7 +95,19 @@ public class HomeActivity extends FragmentActivity {
             }
         });
 
-        Log.e("url ",  "getData " + weatherCollectionResponseCall.request().url());
+        Log.e("url ", "getData " + weatherCollectionResponseCall.request().url());
+    }
+
+    private void fetchDataFromResponse() {
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        formattedDate = df.format(c.getTime());
+        Toast.makeText(this, "Date " + formattedDate, Toast.LENGTH_SHORT).show();
+
+        df = new SimpleDateFormat("EEEE");
+        Date d = new Date();
+        dayOfTheWeek = df.format(d);
+        Toast.makeText(this, "Day " + dayOfTheWeek, Toast.LENGTH_SHORT).show();
     }
 
 //    @Override
@@ -102,7 +118,7 @@ public class HomeActivity extends FragmentActivity {
 //    }
 
     private void initializeNetworkingLibrary() {
-        Retrofit retrofit = new  Retrofit.Builder()
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -115,40 +131,5 @@ public class HomeActivity extends FragmentActivity {
 //        startActivity(about);
 //
 //    }
-
-}
-
-class MyAdapter extends FragmentPagerAdapter {
-
-    public MyAdapter(FragmentManager fm) {
-        super(fm);
-    }
-
-    @Override
-    public Fragment getItem(int position) {
-        Fragment fragment = null;
-        if (position == 0) {
-            fragment = new FirstFragment();
-        }
-        if (position == 1) {
-            fragment = new SecondFragment();
-        }
-        if (position == 2) {
-            fragment = new ThirdFragment();
-        }
-        if (position == 3) {
-            fragment = new FourthFragment();
-        }
-        if (position == 4) {
-            fragment = new FifthFragment();
-        }
-
-        return fragment;
-    }
-
-    @Override
-    public int getCount() {
-        return 5;
-    }
 
 }
