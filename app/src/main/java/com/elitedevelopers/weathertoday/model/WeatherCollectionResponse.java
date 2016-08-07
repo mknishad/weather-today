@@ -1,4 +1,4 @@
-package com.elitedevelopers.weathertoday.response;
+package com.elitedevelopers.weathertoday.model;
 
 import com.elitedevelopers.weathertoday.model.City;
 import com.elitedevelopers.weathertoday.model.Clouds;
@@ -142,5 +142,4 @@ public class WeatherCollectionResponse {
     public void setWeather(List<Weather> weather) {
         this.weather = weather;
     }
-
 }

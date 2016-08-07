@@ -1,6 +1,6 @@
 package com.elitedevelopers.weathertoday.interfaceapi;
 
-import com.elitedevelopers.weathertoday.response.WeatherCollectionResponse;
+import com.elitedevelopers.weathertoday.model.WeatherCollectionResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
