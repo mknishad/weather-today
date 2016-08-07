@@ -1,7 +1,5 @@
 package com.elitedevelopers.weathertoday.activity;
 
-import android.app.ActionBar;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -9,12 +7,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.elitedevelopers.weathertoday.About;
 import com.elitedevelopers.weathertoday.R;
 import com.elitedevelopers.weathertoday.constant.Constants;
 import com.elitedevelopers.weathertoday.fragment.FifthFragment;
@@ -23,9 +19,6 @@ import com.elitedevelopers.weathertoday.fragment.FourthFragment;
 import com.elitedevelopers.weathertoday.fragment.SecondFragment;
 import com.elitedevelopers.weathertoday.fragment.ThirdFragment;
 import com.elitedevelopers.weathertoday.interfaceapi.WeatherApi;
-import com.elitedevelopers.weathertoday.model.City;
-import com.elitedevelopers.weathertoday.model.Clouds;
-import com.elitedevelopers.weathertoday.model.Weather;
 import com.elitedevelopers.weathertoday.model.WeatherCollectionResponse;
 
 import retrofit2.Call;
@@ -36,58 +29,45 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeActivity extends FragmentActivity {
 
-    ViewPager viewPager;
-    ActionBar actionBar;
     WeatherApi weatherApi;
-    Weather weather;
-    City city;
-    Clouds clouds;
     WeatherCollectionResponse weatherCollectionResponse;
+    ViewPager viewPager;
+    TextView tvDay;
+    TextView tvDate;
+    TextView tvCityName;
+    TextView tvTemperature;
+    TextView tvCondition;
+    TextView tvHumidity;
+    TextView tvPressure;
+    TextView tvPrecipitation;
+    TextView tvWind;
+    ImageView ivCondition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
-        viewPager.setAdapter(new MyAdapter(getSupportFragmentManager()));
-
-        // get a reference of the action bar
-//        actionBar = getActionBar();
-//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-//        ActionBar.Tab tab1 = actionBar.newTab();
-//        tab1.setText("Day 1");
-//        tab1.setTabListener(this);
-//
-//        ActionBar.Tab tab2 = actionBar.newTab();
-//        tab1.setText("Day 2");
-//        tab1.setTabListener(this);
-//
-//        ActionBar.Tab tab3 = actionBar.newTab();
-//        tab1.setText("Day 3");
-//        tab1.setTabListener(this);
-//
-//        ActionBar.Tab tab4 = actionBar.newTab();
-//        tab1.setText("Day 4");
-//        tab1.setTabListener(this);
-//
-//        ActionBar.Tab tab5 = actionBar.newTab();
-//        tab1.setText("Day 5");
-//        tab1.setTabListener(this);
-//
-//        actionBar.addTab(tab1);
-//        actionBar.addTab(tab2);
-//        actionBar.addTab(tab3);
-//        actionBar.addTab(tab4);
-//        actionBar.addTab(tab5);
-
         initializeNetworkingLibrary();
         getData();
+        initializeViews();
 
-//        List<Weather> weathers = weatherCollectionResponse.getWeather();
-//        String description  = weathers.get(0).getDescription();
-//        Toast.makeText(HomeActivity.this, description, Toast.LENGTH_SHORT).show();
+        viewPager.setAdapter(new MyAdapter(getSupportFragmentManager()));
+
+    }
+
+    private void initializeViews() {
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        tvDay = (TextView) findViewById(R.id.tvDay);
+        tvDate = (TextView) findViewById(R.id.tvDate);
+        tvCityName = (TextView) findViewById(R.id.tvCityName);
+        tvTemperature = (TextView) findViewById(R.id.tvTemperature);
+        tvCondition = (TextView) findViewById(R.id.tvCondition);
+        tvHumidity = (TextView) findViewById(R.id.tvHumidity);
+        tvPressure = (TextView) findViewById(R.id.tvPressure);
+        tvPrecipitation = (TextView) findViewById(R.id.tvPrecipitation);
+        tvWind = (TextView) findViewById(R.id.tvWind);
+        ivCondition = (ImageView) findViewById(R.id.ivCondition);
     }
 
     private void getData() {
@@ -97,27 +77,11 @@ public class HomeActivity extends FragmentActivity {
             @Override
             public void onResponse(Call<WeatherCollectionResponse> call, Response<WeatherCollectionResponse> response) {
                 weatherCollectionResponse = response.body();
-//                List<PoetCollectionResponse.Poet> poets = poetCollectionResponse.getPoets();
-//                Log.e("data", " onResponse " + poets.get(0).getName());
 
-//                city = weatherCollectionResponse.getCity();
-//                String cityName = city.getName();
-//                List<Weather>  weathers = weatherCollectionResponse.getWeather();
-//                String description = weathers.get(0).getDescription();
-//                String icon = weathers.get(0).getIcon();
-                clouds = weatherCollectionResponse.getList().get(0).getClouds();
-                Integer all = clouds.getAll();
-//                String cityName = weatherCollectionResponse.getCity().getName();
-                Toast.makeText(HomeActivity.this, ""+all, Toast.LENGTH_SHORT).show();
-
-//                Log.e("Clouds", "onResponse: " + clouds.toString());
+//                clouds = weatherCollectionResponse.getList().get(0).getClouds();
 //                Integer all = clouds.getAll();
-
-//                Toast.makeText(HomeActivity.this, description, Toast.LENGTH_SHORT).show();
-//                Toast.makeText(HomeActivity.this, icon, Toast.LENGTH_SHORT).show();
+//                String cityName = weatherCollectionResponse.getCity().getName();
 //                Toast.makeText(HomeActivity.this, ""+all, Toast.LENGTH_SHORT).show();
-
-//                Toast.makeText(HomeActivity.this, "Successful", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -130,12 +94,12 @@ public class HomeActivity extends FragmentActivity {
         Log.e("url ",  "getData " + weatherCollectionResponseCall.request().url());
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater=getMenuInflater();
-        inflater.inflate(R.menu.main,menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater=getMenuInflater();
+//        inflater.inflate(R.menu.main,menu);
+//        return true;
+//    }
 
     private void initializeNetworkingLibrary() {
         Retrofit retrofit = new  Retrofit.Builder()
@@ -146,28 +110,12 @@ public class HomeActivity extends FragmentActivity {
 
     }
 
-    public void Aboutus(MenuItem item) {
-        Intent about=new Intent(this, About.class);
-        startActivity(about);
+//    public void aboutus(MenuItem item) {
+//        Intent about=new Intent(this, AboutActivity.class);
+//        startActivity(about);
+//
+//    }
 
-    }
-
-    /*
-    @Override
-    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-
-    }
-
-    @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-
-    }
-
-    @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-
-    }
-    */
 }
 
 class MyAdapter extends FragmentPagerAdapter {

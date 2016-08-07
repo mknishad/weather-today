@@ -16,7 +16,7 @@
         android:layout_height="0dp">
 
         <ImageView
-            android:id="@+id/ivMain"
+            android:id="@+id/ivCondition"
             android:src="@drawable/splash"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
@@ -67,11 +67,11 @@
 
         <TextView
             android:id="@+id/tvCondition"
-            android:layout_below="@id/ivMain"
-            android:layout_alignEnd="@id/ivMain"
+            android:layout_below="@id/ivCondition"
+            android:layout_alignEnd="@id/ivCondition"
             android:layout_alignRight="@id/ivMain"
             android:layout_marginTop="8dp"
-            android:text="Condition"
+            android:text="@string/condition"
             android:textSize="30sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

@@ -23,4 +23,6 @@
     <string name="precipitation">Precipitation:</string>
     <string name="precipitation_value">Precipation</string>
     <string name="today">Today</string>
+    <string name="about_us">We are Elite Developers, some passionate Android Application Developers. We love to take challenge and solve creative problems. This is our first app. Feel free to contact us and give your feedback. Thank you.</string>
+    <string name="condition">Condition</string>
 </resources>

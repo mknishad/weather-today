@@ -1,9 +1,11 @@
-package com.elitedevelopers.weathertoday;
+package com.elitedevelopers.weathertoday.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class About extends AppCompatActivity {
+import com.elitedevelopers.weathertoday.R;
+
+public class AboutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
