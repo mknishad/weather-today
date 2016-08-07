@@ -14,18 +14,18 @@ public class City {
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("findname")
-    @Expose
-    private String findname;
-    @SerializedName("country")
-    @Expose
-    private String country;
     @SerializedName("coord")
     @Expose
     private Coord coord;
-    @SerializedName("zoom")
+    @SerializedName("country")
     @Expose
-    private Integer zoom;
+    private String country;
+    @SerializedName("population")
+    @Expose
+    private Integer population;
+    @SerializedName("sys")
+    @Expose
+    private Sys sys;
 
     /**
      *
@@ -66,19 +66,19 @@ public class City {
     /**
      *
      * @return
-     * The findname
+     * The coord
      */
-    public String getFindname() {
-        return findname;
+    public Coord getCoord() {
+        return coord;
     }
 
     /**
      *
-     * @param findname
-     * The findname
+     * @param coord
+     * The coord
      */
-    public void setFindname(String findname) {
-        this.findname = findname;
+    public void setCoord(Coord coord) {
+        this.coord = coord;
     }
 
     /**
@@ -102,37 +102,37 @@ public class City {
     /**
      *
      * @return
-     * The coord
+     * The population
      */
-    public Coord getCoord() {
-        return coord;
+    public Integer getPopulation() {
+        return population;
     }
 
     /**
      *
-     * @param coord
-     * The coord
+     * @param population
+     * The population
      */
-    public void setCoord(Coord coord) {
-        this.coord = coord;
+    public void setPopulation(Integer population) {
+        this.population = population;
     }
 
     /**
      *
      * @return
-     * The zoom
+     * The sys
      */
-    public Integer getZoom() {
-        return zoom;
+    public Sys getSys() {
+        return sys;
     }
 
     /**
      *
-     * @param zoom
-     * The zoom
+     * @param sys
+     * The sys
      */
-    public void setZoom(Integer zoom) {
-        this.zoom = zoom;
+    public void setSys(Sys sys) {
+        this.sys = sys;
     }
 
 }

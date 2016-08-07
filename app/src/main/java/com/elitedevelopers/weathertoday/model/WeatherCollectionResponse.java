@@ -1,15 +1,9 @@
 package com.elitedevelopers.weathertoday.model;
 
-import com.elitedevelopers.weathertoday.model.City;
-import com.elitedevelopers.weathertoday.model.Clouds;
-import com.elitedevelopers.weathertoday.model.Main;
-import com.elitedevelopers.weathertoday.model.Weather;
-import com.elitedevelopers.weathertoday.model.Wind;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Mobile App Develop on 6-8-16.
@@ -19,21 +13,18 @@ public class WeatherCollectionResponse {
     @SerializedName("city")
     @Expose
     private City city;
-    @SerializedName("time")
+    @SerializedName("cod")
     @Expose
-    private Integer time;
-    @SerializedName("main")
+    private String cod;
+    @SerializedName("message")
     @Expose
-    private Main main;
-    @SerializedName("wind")
+    private Double message;
+    @SerializedName("cnt")
     @Expose
-    private Wind wind;
-    @SerializedName("clouds")
+    private Integer cnt;
+    @SerializedName("list")
     @Expose
-    private Clouds clouds;
-    @SerializedName("weather")
-    @Expose
-    private List<Weather> weather = new ArrayList<Weather>();
+    private java.util.List<com.elitedevelopers.weathertoday.model.List> list = new ArrayList<com.elitedevelopers.weathertoday.model.List>();
 
     /**
      *
@@ -56,90 +47,72 @@ public class WeatherCollectionResponse {
     /**
      *
      * @return
-     * The time
+     * The cod
      */
-    public Integer getTime() {
-        return time;
+    public String getCod() {
+        return cod;
     }
 
     /**
      *
-     * @param time
-     * The time
+     * @param cod
+     * The cod
      */
-    public void setTime(Integer time) {
-        this.time = time;
-    }
-
-    /**
-     *
-     * @return
-     * The main
-     */
-    public Main getMain() {
-        return main;
-    }
-
-    /**
-     *
-     * @param main
-     * The main
-     */
-    public void setMain(Main main) {
-        this.main = main;
+    public void setCod(String cod) {
+        this.cod = cod;
     }
 
     /**
      *
      * @return
-     * The wind
+     * The message
      */
-    public Wind getWind() {
-        return wind;
+    public Double getMessage() {
+        return message;
     }
 
     /**
      *
-     * @param wind
-     * The wind
+     * @param message
+     * The message
      */
-    public void setWind(Wind wind) {
-        this.wind = wind;
-    }
-
-    /**
-     *
-     * @return
-     * The clouds
-     */
-    public Clouds getClouds() {
-        return clouds;
-    }
-
-    /**
-     *
-     * @param clouds
-     * The clouds
-     */
-    public void setClouds(Clouds clouds) {
-        this.clouds = clouds;
+    public void setMessage(Double message) {
+        this.message = message;
     }
 
     /**
      *
      * @return
-     * The weather
+     * The cnt
      */
-    public List<Weather> getWeather() {
-        return weather;
+    public Integer getCnt() {
+        return cnt;
     }
 
     /**
      *
-     * @param weather
-     * The weather
+     * @param cnt
+     * The cnt
      */
-    public void setWeather(List<Weather> weather) {
-        this.weather = weather;
+    public void setCnt(Integer cnt) {
+        this.cnt = cnt;
+    }
+
+    /**
+     *
+     * @return
+     * The list
+     */
+    public java.util.List<com.elitedevelopers.weathertoday.model.List> getList() {
+        return list;
+    }
+
+    /**
+     *
+     * @param list
+     * The list
+     */
+    public void setList(java.util.List<com.elitedevelopers.weathertoday.model.List> list) {
+        this.list = list;
     }
 }
