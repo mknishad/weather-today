@@ -30,7 +30,6 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.AboutActivity"></activity>
     </application>
 
 </manifest>

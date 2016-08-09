@@ -1,7 +1,6 @@
 package com.elitedevelopers.weathertoday.activity;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
@@ -11,9 +10,11 @@ import android.widget.Toast;
 import com.elitedevelopers.weathertoday.R;
 import com.elitedevelopers.weathertoday.constant.Constants;
 import com.elitedevelopers.weathertoday.interfaceapi.WeatherApi;
+import com.elitedevelopers.weathertoday.model.Main;
 import com.elitedevelopers.weathertoday.model.WeatherCollectionResponse;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -28,7 +29,11 @@ public class HomeActivity extends AppCompatActivity {
     private WeatherApi weatherApi;
     private WeatherCollectionResponse weatherCollectionResponse;
 
-    private ViewPager viewPager;
+    private java.util.List<com.elitedevelopers.weathertoday.model.List> responseList;
+    private ArrayList<Main> mains;
+    private ArrayList<Double> temperaturesDouble;
+    private ArrayList<Integer> temperaturesInteger;
+
     private TextView tvDay;
     private TextView tvDate;
     private TextView tvCityName;
@@ -42,6 +47,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private String dayOfTheWeek;
     private String formattedDate;
+    private String temperature;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +57,13 @@ public class HomeActivity extends AppCompatActivity {
         initializeViews();
         initializeNetworkingLibrary();
         getData();
-        fetchDataFromResponse();
-        setData();
-    }
-
-    private void setData() {
-        tvDay.setText(dayOfTheWeek);
-        tvDate.setText(formattedDate);
-        tvCityName.setText("Dhaka");
     }
 
     private void initializeViews() {
+        responseList = new ArrayList<>();
+        mains = new ArrayList<>();
+        temperaturesDouble = new ArrayList<>();
+        temperaturesInteger = new ArrayList<>();
         tvDay = (TextView) findViewById(R.id.tvDay);
         tvDate = (TextView) findViewById(R.id.tvDate);
         tvCityName = (TextView) findViewById(R.id.tvCityName);
@@ -82,10 +84,41 @@ public class HomeActivity extends AppCompatActivity {
             public void onResponse(Call<WeatherCollectionResponse> call, Response<WeatherCollectionResponse> response) {
                 weatherCollectionResponse = response.body();
 
-//                clouds = weatherCollectionResponse.getList().get(0).getClouds();
-//                Integer all = clouds.getAll();
-//                String cityName = weatherCollectionResponse.getCity().getName();
-//                Toast.makeText(HomeActivity.this, ""+all, Toast.LENGTH_SHORT).show();
+                responseList = weatherCollectionResponse.getList();
+//                Toast.makeText(HomeActivity.this, ""+responseList.size(), Toast.LENGTH_SHORT).show();
+
+                for (int i = 0; i < responseList.size(); i++) {
+                    mains.add(responseList.get(i).getMain());
+                }
+
+                for (int i = 0; i < mains.size(); i++) {
+                    temperaturesDouble.add(mains.get(i).getTemp() - 273.0);
+                    temperaturesInteger.add(temperaturesDouble.get(i).intValue());
+//                    Toast.makeText(HomeActivity.this, ""+temperaturesInteger.get(i), Toast.LENGTH_SHORT).show();
+                }
+
+                /**
+                 *  fetch data from response
+                 */
+                // value of date text view
+                Calendar c = Calendar.getInstance();
+                SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+                formattedDate = df.format(c.getTime());
+//        Toast.makeText(this, "Date " + formattedDate, Toast.LENGTH_SHORT).show();
+
+                // value of day text view
+                df = new SimpleDateFormat("EEEE");
+                Date d = new Date();
+                dayOfTheWeek = df.format(d);
+//        Toast.makeText(this, "Day " + dayOfTheWeek, Toast.LENGTH_SHORT).show();
+
+                // value of temperature text view
+                temperature = "" + temperaturesInteger.get(0);
+
+                tvDay.setText(dayOfTheWeek);
+                tvDate.setText(formattedDate);
+                tvCityName.setText("Dhaka");
+                tvTemperature.setText(temperature);
             }
 
             @Override
@@ -98,25 +131,6 @@ public class HomeActivity extends AppCompatActivity {
         Log.e("url ", "getData " + weatherCollectionResponseCall.request().url());
     }
 
-    private void fetchDataFromResponse() {
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
-        formattedDate = df.format(c.getTime());
-        Toast.makeText(this, "Date " + formattedDate, Toast.LENGTH_SHORT).show();
-
-        df = new SimpleDateFormat("EEEE");
-        Date d = new Date();
-        dayOfTheWeek = df.format(d);
-        Toast.makeText(this, "Day " + dayOfTheWeek, Toast.LENGTH_SHORT).show();
-    }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater=getMenuInflater();
-//        inflater.inflate(R.menu.main,menu);
-//        return true;
-//    }
-
     private void initializeNetworkingLibrary() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
@@ -125,11 +139,5 @@ public class HomeActivity extends AppCompatActivity {
         weatherApi = retrofit.create(WeatherApi.class);
 
     }
-
-//    public void aboutus(MenuItem item) {
-//        Intent about=new Intent(this, AboutActivity.class);
-//        startActivity(about);
-//
-//    }
 
 }

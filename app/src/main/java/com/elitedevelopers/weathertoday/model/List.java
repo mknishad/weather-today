@@ -19,7 +19,7 @@ public class List {
     private Main main;
     @SerializedName("weather")
     @Expose
-    private java.util.List<Weather> weather = new ArrayList<Weather>();
+    private java.util.List<Weather> weather = new ArrayList<>();
     @SerializedName("clouds")
     @Expose
     private Clouds clouds;

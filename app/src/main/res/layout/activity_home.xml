@@ -4,14 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#FFFFFF"
+    android:background="@drawable/background"
     tools:context=".activity.HomeActivity">
 
     <!-- TODO: Update blank fragment layout -->
 
     <RelativeLayout
         android:id="@+id/layoutHeader"
-        android:layout_weight="1"
+        android:layout_weight="1.2"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp">
@@ -30,6 +30,7 @@
             android:layout_marginTop="10dp"
             android:text="@string/today"
             android:textSize="30sp"
+            android:textColor="#FFFFFF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -38,6 +39,7 @@
             android:layout_below="@id/tvDay"
             android:text="@string/date"
             android:textSize="25sp"
+            android:textColor="#FFFFFF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -47,6 +49,7 @@
             android:layout_below="@+id/tvDate"
             android:text="@string/city_name"
             android:textSize="25sp"
+            android:textColor="#FFFFFF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -55,6 +58,7 @@
             android:layout_below="@+id/tvCityName"
             android:text="25"
             android:textSize="60sp"
+            android:textColor="#FFFFFF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -64,6 +68,7 @@
             android:layout_alignTop="@+id/tvTemperature"
             android:text="@string/degree"
             android:textSize="60sp"
+            android:textColor="#FFFFFF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -76,6 +81,7 @@
             android:layout_marginRight="8dp"
             android:text="@string/condition"
             android:textSize="30sp"
+            android:textColor="#FFFFFF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
