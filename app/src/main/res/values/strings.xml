@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">WeatherToday</string>
     <string name="temperature">Temperature:</string>
-    <string name="celcious">celcious</string>
+    <string name="celsius">celsius</string>
     <string name="c">°C</string>
     <string name="deg">deg</string>
     <string name="percent">%</string>
@@ -18,10 +18,10 @@
     <string name="date">Date</string>
     <string name="humidity">Humidity:</string>
     <string name="pressure">Pressure:</string>
-    <string name="pressure_value">Prssure Value</string>
+    <string name="pressure_value">Pressure Value</string>
     <string name="humidity_value">Humidity Value</string>
     <string name="precipitation">Precipitation:</string>
-    <string name="precipitation_value">Precipation</string>
+    <string name="precipitation_value">Precipitation</string>
     <string name="today">Today</string>
     <string name="about_us">We are Elite Developers, some passionate Android Application Developers. We love to take challenge and solve creative problems. This is our first app. Feel free to contact us and give your feedback. Thank you.</string>
     <string name="condition">Condition</string>

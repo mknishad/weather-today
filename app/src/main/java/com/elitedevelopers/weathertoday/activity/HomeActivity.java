@@ -11,6 +11,7 @@ import com.elitedevelopers.weathertoday.R;
 import com.elitedevelopers.weathertoday.constant.Constants;
 import com.elitedevelopers.weathertoday.interfaceapi.WeatherApi;
 import com.elitedevelopers.weathertoday.model.Main;
+import com.elitedevelopers.weathertoday.model.Weather;
 import com.elitedevelopers.weathertoday.model.WeatherCollectionResponse;
 
 import java.text.SimpleDateFormat;
@@ -33,6 +34,7 @@ public class HomeActivity extends AppCompatActivity {
     private ArrayList<Main> mains;
     private ArrayList<Double> temperaturesDouble;
     private ArrayList<Integer> temperaturesInteger;
+    private ArrayList<Weather> weatherList;
 
     private TextView tvDay;
     private TextView tvDate;
@@ -69,9 +71,9 @@ public class HomeActivity extends AppCompatActivity {
         tvCityName = (TextView) findViewById(R.id.tvCityName);
         tvTemperature = (TextView) findViewById(R.id.tvTemperature);
         tvCondition = (TextView) findViewById(R.id.tvCondition);
-        tvHumidity = (TextView) findViewById(R.id.tvHumidity);
+        tvHumidity = (TextView) findViewById(R.id.tvPrecipitation);
         tvPressure = (TextView) findViewById(R.id.tvPressure);
-        tvPrecipitation = (TextView) findViewById(R.id.tvPrecipitation);
+        tvPrecipitation = (TextView) findViewById(R.id.tvHumidity);
         tvWind = (TextView) findViewById(R.id.tvWind);
         ivCondition = (ImageView) findViewById(R.id.ivCondition);
     }
@@ -87,6 +89,8 @@ public class HomeActivity extends AppCompatActivity {
                 responseList = weatherCollectionResponse.getList();
 //                Toast.makeText(HomeActivity.this, ""+responseList.size(), Toast.LENGTH_SHORT).show();
 
+                weatherList = (ArrayList<Weather>) responseList.get(0).getWeather();
+
                 for (int i = 0; i < responseList.size(); i++) {
                     mains.add(responseList.get(i).getMain());
                 }
@@ -97,9 +101,6 @@ public class HomeActivity extends AppCompatActivity {
 //                    Toast.makeText(HomeActivity.this, ""+temperaturesInteger.get(i), Toast.LENGTH_SHORT).show();
                 }
 
-                /**
-                 *  fetch data from response
-                 */
                 // value of date text view
                 Calendar c = Calendar.getInstance();
                 SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
@@ -115,10 +116,15 @@ public class HomeActivity extends AppCompatActivity {
                 // value of temperature text view
                 temperature = "" + temperaturesInteger.get(0);
 
+                // value of condition text view
+                String description = weatherList.get(0).getDescription();
+
+                // set values
                 tvDay.setText(dayOfTheWeek);
                 tvDate.setText(formattedDate);
                 tvCityName.setText("Dhaka");
                 tvTemperature.setText(temperature);
+                tvCondition.setText(description);
             }
 
             @Override
