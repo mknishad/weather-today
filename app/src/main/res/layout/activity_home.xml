@@ -89,7 +89,7 @@
 
     <LinearLayout
         android:id="@+id/layoutFooter"
-        android:layout_weight="1.2"
+        android:layout_weight="1.1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical">
@@ -227,41 +227,6 @@
 
             <ImageView
                 android:id="@+id/ivDayFourCond"
-                android:layout_weight="2"
-                android:src="@android:drawable/ic_dialog_info"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/tvDayFiveDate"
-                android:text="01/01/2016"
-                android:textSize="23sp"
-                android:textColor="#000000"
-                android:gravity="center_vertical"
-                android:layout_weight="6"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"/>
-
-            <TextView
-                android:id="@+id/tvDayFiveTemp"
-                android:text="25 °C"
-                android:textSize="23sp"
-                android:textColor="#000000"
-                android:gravity="center_vertical"
-                android:layout_weight="2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"/>
-
-            <ImageView
-                android:id="@+id/ivDayFiveCond"
                 android:layout_weight="2"
                 android:src="@android:drawable/ic_dialog_info"
                 android:layout_width="0dp"
