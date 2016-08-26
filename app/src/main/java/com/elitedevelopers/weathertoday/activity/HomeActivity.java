@@ -4,6 +4,9 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,102 +74,27 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+
+        // return true so that the menu pop up is opened
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.refresh) {
+            getData();
+        }
+
+        return true;
+    }
+
+    @Override
     protected void onStart() {
         initializeNetworkingLibrary();
         getData();
-
-        /*
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        weatherApi = retrofit.create(WeatherApi.class);
-
-        Call<WeatherCollectionResponse> weatherCollectionResponseCall = weatherApi.getWeather();
-        Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
-        weatherCollectionResponseCall.enqueue(new Callback<WeatherCollectionResponse>() {
-            @Override
-            public void onResponse(Call<WeatherCollectionResponse> call, Response<WeatherCollectionResponse> response) {
-                weatherCollectionResponse = response.body();
-
-                responseList = weatherCollectionResponse.getList();
-//                Toast.makeText(HomeActivity.this, ""+responseList.size(), Toast.LENGTH_SHORT).show();
-
-                weatherList = (ArrayList<Weather>) responseList.get(0).getWeather();
-
-                for (int i = 0; i < responseList.size(); i++) {
-                    mains.add(responseList.get(i).getMain());
-                }
-
-                for (int i = 0; i < mains.size(); i++) {
-                    temperaturesDouble.add(mains.get(i).getTemp() - 273.0);
-                    temperaturesInteger.add(temperaturesDouble.get(i).intValue());
-//                    Toast.makeText(HomeActivity.this, ""+temperaturesInteger.get(i), Toast.LENGTH_SHORT).show();
-                }
-
-                // value of day text view
-                SimpleDateFormat df = new SimpleDateFormat("EEEE");
-                Date d = new Date();
-                dayOfTheWeek = df.format(d);
-//        Toast.makeText(this, "Day " + dayOfTheWeek, Toast.LENGTH_SHORT).show();
-
-                // value of date text view
-                Calendar c = Calendar.getInstance();
-                df = new SimpleDateFormat("dd-MMM-yyyy");
-                formattedDate = df.format(c.getTime());
-//        Toast.makeText(this, "Date " + formattedDate, Toast.LENGTH_SHORT).show();
-
-                // value of temperature text view
-                temperature = "" + temperaturesInteger.get(0);
-
-                // value of condition text view
-                String description = weatherList.get(0).getDescription();
-
-                // set values
-                tvDay.setText(dayOfTheWeek);
-                tvDate.setText(formattedDate);
-                tvCityName.setText("Dhaka");
-                tvTemperature.setText(temperature);
-                tvCondition.setText(description);
-
-                // Set forecast dates
-                // Day one
-                Date dt = new Date();
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(dt);
-                cal.add(Calendar.DATE, 1);
-                //dt = cal.getTime();
-                formattedDate = df.format(cal.getTime());
-                tvDayOneDate.setText(formattedDate);
-                // Day two
-                cal.add(Calendar.DATE, 1);
-                formattedDate = df.format(cal.getTime());
-                tvDayTwoDate.setText(formattedDate);
-                // Day three
-                cal.add(Calendar.DATE, 1);
-                formattedDate = df.format(cal.getTime());
-                tvDayThreeDate.setText(formattedDate);
-                // Day four
-                cal.add(Calendar.DATE, 1);
-                formattedDate = df.format(cal.getTime());
-                tvDayFourDate.setText(formattedDate);
-
-                // Set forecast temperatures
-                tvDayOneTemp.setText(temperaturesInteger.get(8) + "°C");
-                tvDayTwoTemp.setText(temperaturesInteger.get(15) + "°C");
-                tvDayThreeTemp.setText(temperaturesInteger.get(22) + "°C");
-                tvDayFourTemp.setText(temperaturesInteger.get(29) + "°C");
-            }
-
-            @Override
-            public void onFailure(Call<WeatherCollectionResponse> call, Throwable t) {
-                Toast.makeText(HomeActivity.this, " getData failed", Toast.LENGTH_SHORT).show();
-                Log.e("getdata", "onFailure: ");
-            }
-        });
-
-        Log.e("url ", "getData " + weatherCollectionResponseCall.request().url());
-        */
 
         super.onStart();
     }
