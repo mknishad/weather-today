@@ -1,5 +1,6 @@
 package com.elitedevelopers.weathertoday.activity;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -71,8 +72,10 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
-        //getData();
+        initializeNetworkingLibrary();
+        getData();
 
+        /*
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -163,6 +166,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         Log.e("url ", "getData " + weatherCollectionResponseCall.request().url());
+        */
 
         super.onStart();
     }
@@ -192,10 +196,9 @@ public class HomeActivity extends AppCompatActivity {
         ivDayFourCond = (ImageView) findViewById(R.id.ivDayFourCond);
     }
 
-    /*
     private void getData() {
         Call<WeatherCollectionResponse> weatherCollectionResponseCall = weatherApi.getWeather();
-        Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
         weatherCollectionResponseCall.enqueue(new Callback<WeatherCollectionResponse>() {
             @Override
             public void onResponse(Call<WeatherCollectionResponse> call, Response<WeatherCollectionResponse> response) {
@@ -264,22 +267,46 @@ public class HomeActivity extends AppCompatActivity {
                 tvDayFourDate.setText(formattedDate);
 
                 // Set forecast temperatures
-                tvDayOneTemp.setText(temperaturesInteger.get(8));
-                tvDayTwoTemp.setText(temperaturesInteger.get(15));
-                tvDayThreeTemp.setText(temperaturesInteger.get(22));
-                tvDayFourTemp.setText(temperaturesInteger.get(29));
+                tvDayOneTemp.setText(temperaturesInteger.get(8) + "°C");
+                tvDayTwoTemp.setText(temperaturesInteger.get(16) + "°C");
+                tvDayThreeTemp.setText(temperaturesInteger.get(24) + "°C");
+                tvDayFourTemp.setText(temperaturesInteger.get(32) + "°C");
+
+                // set icons
+                Log.e("onResponse: ", "weatherlist " + weatherList.size() + " " + weatherList.get(0)
+                        .getIcon());
+                ivCondition.setImageResource(getIconID(weatherList.get(0).getIcon()));
+
+                weatherList = (ArrayList<Weather>) responseList.get(8).getWeather();
+                Log.e("onResponse: ", "weatherlist " + weatherList.size() + " " + weatherList.get(0)
+                        .getIcon());
+                ivDayOneCond.setImageResource(getIconID(weatherList.get(0).getIcon()));
+
+                weatherList = (ArrayList<Weather>) responseList.get(16).getWeather();
+                Log.e("onResponse: ", "weatherlist " + weatherList.size() + " " + weatherList.get(0)
+                        .getIcon());
+                ivDayTwoCond.setImageResource(getIconID(weatherList.get(0).getIcon()));
+
+                weatherList = (ArrayList<Weather>) responseList.get(24).getWeather();
+                Log.e("onResponse: ", "weatherlist " + weatherList.size() + " " + weatherList.get(0)
+                        .getIcon());
+                ivDayThreeCond.setImageResource(getIconID(weatherList.get(0).getIcon()));
+
+                weatherList = (ArrayList<Weather>) responseList.get(32).getWeather();
+                Log.e("onResponse: ", "weatherlist " + weatherList.size() + " " + weatherList.get(0)
+                        .getIcon());
+                ivDayFourCond.setImageResource(getIconID(weatherList.get(0).getIcon()));
             }
 
             @Override
             public void onFailure(Call<WeatherCollectionResponse> call, Throwable t) {
                 Toast.makeText(HomeActivity.this, " getData failed", Toast.LENGTH_SHORT).show();
-                Log.e("getdata", "onFailure: ");
+                Log.e("getdata", "onFailure: " + t.getMessage());
             }
         });
 
         Log.e("url ", "getData " + weatherCollectionResponseCall.request().url());
     }
-    */
 
     private void initializeNetworkingLibrary() {
         Retrofit retrofit = new Retrofit.Builder()
@@ -287,6 +314,13 @@ public class HomeActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         weatherApi = retrofit.create(WeatherApi.class);
+    }
+
+    private int getIconID(String s)
+    {
+        Resources res = getResources();
+        int resID = res.getIdentifier("i"+s,"drawable", getPackageName());
+        return resID;
     }
 
 }

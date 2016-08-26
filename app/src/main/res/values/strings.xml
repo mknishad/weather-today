@@ -13,16 +13,16 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="city_name">City Name</string>
+    <string name="city_name">Dhaka</string>
     <string name="degree">°C</string>
-    <string name="date">Date</string>
+    <string name="date">27-08-2016</string>
     <string name="humidity">Humidity:</string>
     <string name="pressure">Pressure:</string>
     <string name="pressure_value">Pressure Value</string>
     <string name="humidity_value">Humidity Value</string>
     <string name="precipitation">Precipitation:</string>
     <string name="precipitation_value">Precipitation</string>
-    <string name="today">Today</string>
+    <string name="today">Saturday</string>
     <string name="about_us">We are Elite Developers, some passionate Android Application Developers. We love to take challenge and solve creative problems. This is our first app. Feel free to contact us and give your feedback. Thank you.</string>
-    <string name="condition">Condition</string>
+    <string name="condition">Partly cloudy</string>
 </resources>
